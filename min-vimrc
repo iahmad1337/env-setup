@@ -44,6 +44,8 @@ Plug 'A-Ih/argtextobj.vim' " aa ia (original plugin conflicts with my mappings)
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'haya14busa/incsearch.vim'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 " Misc
 Plug 'mhinz/vim-startify'
 Plug 'voldikss/vim-floaterm'
