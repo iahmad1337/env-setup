@@ -1,0 +1,178 @@
+set backspace=2
+
+set foldenable
+set foldmethod=manual
+
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set textwidth=80
+set nohls
+
+set cursorline
+set number
+
+" File settings {{{
+augroup ftype_group
+    autocmd!
+    autocmd FileType cpp,c,h,hpp,cc,hh setlocal ts=2 sts=2 sw=2 foldenable foldmethod=syntax
+    autocmd FileType txt,text,tex,latex setlocal spell spelllang=ru,en complete=".,w,b,u,t,i,kspell"
+augroup END
+" }}}
+
+filetype plugin indent on
+set encoding=utf-8
+set nocompatible
+syntax enable
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
+" Text objects and actions on them
+Plug 'michaeljsmith/vim-indent-object' " ai ii aI
+Plug 'kana/vim-textobj-user' " necessary for the following plugin
+Plug 'kana/vim-textobj-entire' " ae ie
+Plug 'tommcdo/vim-exchange'  " cx<motion> cxx X(visual) cxc(cancel)
+Plug 'machakann/vim-highlightedyank'
+Plug 'A-Ih/argtextobj.vim' " aa ia (original plugin conflicts with my mappings)
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'haya14busa/incsearch.vim'
+" Misc
+Plug 'mhinz/vim-startify'
+Plug 'voldikss/vim-floaterm'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Appearence
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
+"""""""""""""""
+"  IncSearch  "
+"""""""""""""""
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+set hlsearch
+set ignorecase
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+"""""""""""""""""""""
+"  HighlightedYank  "
+"""""""""""""""""""""
+if !exists('##TextYankPost')
+  nmap y <Plug>(highlightedyank)
+  xmap y <Plug>(highlightedyank)
+  omap y <Plug>(highlightedyank)
+endif
+
+"""""""""""""""
+"  UltiSnips  "
+"""""""""""""""
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsListSnippets="<c-Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+""""""""""""""""
+"  ArgTextObj  "
+""""""""""""""""
+let g:argtextobj_pairs="(:),<:>,{:}"
+
+"""""""""""""
+"  Airline  "
+"""""""""""""
+let g:airline#extensions#keymap#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline_section_y = ""  " by default does something
+let g:airline_section_z = "Ln:%l/%L Col:%c"
+let g:Powerline_symbols='unicode'
+
+"""""""""""""
+"  fzf.vim  "
+"""""""""""""
+nnoremap <silent> ,f :Files<CR>
+nnoremap <silent> ,h :Helptags<CR>
+nnoremap <silent> ,b :Buffers<CR>
+nnoremap <silent> ,s :Snippets<CR>
+nnoremap <silent> ,c :Commands<CR>
+nnoremap <silent> ,l :Lines<CR>
+
+""""""""""""""
+"  Floaterm  "
+""""""""""""""
+let g:floaterm_position='bottom'
+let g:floaterm_width=1.0
+let g:floaterm_autoclose=2
+let g:floaterm_keymap_toggle = ',tt'
+
+"""""""""""""""""
+"  VimStartify  "
+"""""""""""""""""
+let g:startify_bookmarks = [ '~/.vimrc', '~/.vim', '~/personal']
+
+""""""""""""""""
+"  EasyEscape  "
+""""""""""""""""
+inoremap jk <ESC>
+inoremap kj <ESC>
+cnoremap jk <ESC>
+cnoremap kj <ESC>
+tnoremap jk <ESC>
+tnoremap kj <ESC>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             My personal commands                             "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"kostil"
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+
+""""""""""""""""""
+"  Motion remap  "
+""""""""""""""""""
+"move to the next window in normal mode
+nnoremap <space>h <C-w>h
+nnoremap <space>j <C-w>j
+nnoremap <space>k <C-w>k
+nnoremap <space>l <C-w>l
+
+
+nnoremap Y v$y
+
+"""""""""""""
+"  Helpers  "
+"""""""""""""
+" highlight trailing spaces and TODOs:
+match Error /\v\s+$/
+2match Underlined /\vTODO[^.]*/
+
+set wildmenu
+
+" netrw
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_winsize = 25
+
+" completion & tags
+set omnifunc=syntaxcomplete#Complete
+
+set termguicolors
+" my handmade export of gnome terminal tango theme
+let g:terminal_ansi_colors = ['#2E3436', '#CC0000', '#4E9A06', '#C4A000',
+\ '#3465A4', '#75507B', '#06989A', '#D3D7CF', '#555753', '#EF2929', '#8AE234',
+\ '#FCE94F', '#729FCF', '#AD7FA8', '#34E2E2', '#EEEEEC']
