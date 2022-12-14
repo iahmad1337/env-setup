@@ -53,6 +53,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Appearence
 Plug 'vim-airline/vim-airline'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
 
 """""""""""""""
@@ -172,6 +173,9 @@ let g:netrw_winsize = 25
 
 " completion & tags
 set omnifunc=syntaxcomplete#Complete
+
+colorscheme onehalflight
+let g:airline_theme='onehalfdark'
 
 set termguicolors
 " my handmade export of gnome terminal tango theme
