@@ -1,3 +1,4 @@
+set mouse=a
 set backspace=2
 
 set foldenable
@@ -174,7 +175,7 @@ let g:netrw_winsize = 25
 " completion & tags
 set omnifunc=syntaxcomplete#Complete
 
-colorscheme onehalflight
+colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
 
 set termguicolors

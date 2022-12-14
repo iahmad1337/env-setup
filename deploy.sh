@@ -21,6 +21,7 @@ mkdir -p ~/personal
 mkdir -p ~/.local/bin
 mkdir -p ~/.vim
 cp min-vimrc ~/.vimrc
+cp min-tmux-conf ~/.tmux.conf
 echo "SELECTED_EDITOR=vim" >~/.selected_editor
 
 ################################################################################
@@ -30,7 +31,7 @@ echo "SELECTED_EDITOR=vim" >~/.selected_editor
 progs="tmux vim g++ gcc python3 make mc htop ncdu"
 
 for prog in $progs; do
-    sudo apt install -y "$prog"
+    sudo apt install -q -y "$prog"
 done
 
 echo "Deployment finished."
