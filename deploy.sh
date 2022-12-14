@@ -30,7 +30,7 @@ echo "SELECTED_EDITOR=vim" >~/.selected_editor
 progs="tmux vim g++ gcc python3 make mc htop ncdu"
 
 for prog in $progs; do
-    # sudo apt install -y "$prog" || echo "Failed to install $prog"
+    sudo apt install -y "$prog" || echo "Failed to install $prog"
     echo "Installed $prog"
 done
 
