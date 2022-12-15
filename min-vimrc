@@ -178,6 +178,7 @@ set omnifunc=syntaxcomplete#Complete
 colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
 
+set term=xterm-256color
 set termguicolors
 " my handmade export of gnome terminal tango theme
 let g:terminal_ansi_colors = ['#2E3436', '#CC0000', '#4E9A06', '#C4A000',
