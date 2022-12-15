@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -eux
 
 # This script is responsible for deploying a full-blown development enrironment
 # on remote machines. I only want this to work on ubuntu.
@@ -21,12 +21,6 @@ fi
 mkdir -p ~/personal
 mkdir -p ~/.local/bin
 cp min-tmux-conf ~/.tmux.conf
-echo "SELECTED_EDITOR=nvim" >~/.selected_editor
-
-################################################################################
-#                                  Nvim setup                                  #
-################################################################################
-mkdir -p ~/.config && cp -r ./nvim ~/.config
 
 ################################################################################
 #                                   .bashrc                                    #
@@ -43,11 +37,11 @@ mkdir -p ~/.config && cp -r ./nvim ~/.config
 ################################################################################
 
 install_progs() {
-    print -p "Are you sure you want to install $1? (y/n)" choice
+    read -p "Are you sure you want to install $1? (y/n)" choice
     case "$choice" in
         y|Y )  {
             echo "Installing $1..."
-            sudo apt install --show-progress "$2"
+            sudo apt install $2
             echo "Done installing $1"
         };;
         * ) {
@@ -57,20 +51,21 @@ install_progs() {
 }
 
 progs="\
-    neovim \
     make \
     python3 \
-    python3-pip \
+    python3-pip\
 "
 
-cxx_progs="\
-    gcc \
-    clang \
-    clang++ \
+# DON'T ADD 'clang++' AND OTHER '+' CONTAINING NAMES HERE, IT BREAKS REALLY BAD
+# AND I SPENT A LOT OF TIME SEARCHING FOR A WORKAROUND - NOTHING WORKED
+dev_progs="\
+    build-essential \
     clangd \
     clang-tidy \
     clang-format \
     bear \
+    shellcheck \
+    flake8 \
 "
 
 utility_progs="\
@@ -81,10 +76,31 @@ utility_progs="\
 "
 
 # Install programs essential for development
-sudo apt install -q -y "$progs"
+sudo apt install -q -y $progs
 
-install_progs "c++ development programs" "$cxx_progs"
+install_progs "development programs" "$dev_progs"
 install_progs "utility programs" "$utility_progs"
+
+################################################################################
+#                                    Neovim                                    #
+################################################################################
+read -p "Install neovim? (y/n) " choice
+
+case "$choice" in
+    y|Y )  {
+        mkdir -p ~/programs
+        wget \
+            https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.tar.gz \
+            -P ~/programs
+        tar xzvf ~/programs/nvim-linux64.tar.gz --directory ~/programs
+        ln -s ~/programs/nvim-linux64/bin/nvim ~/.local/bin/nvim
+        mkdir -p ~/.config && cp -r ./nvim ~/.config
+        echo "SELECTED_EDITOR=nvim" >~/.selected_editor
+    };;
+esac
+################################################################################
+#                                   The end.                                   #
+################################################################################
 
 echo "Deployment finished."
 echo "Current state of the filesystem:"
