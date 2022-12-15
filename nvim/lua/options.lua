@@ -52,6 +52,7 @@ vim.cmd([[
 --  Apppearance  --
 -------------------
 vim.o.termguicolors = true
+vim.o.term = 'xterm-256color'
 
 -----------------------------------
 --  Risky non-portable commands  --
