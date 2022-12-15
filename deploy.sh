@@ -30,6 +30,7 @@ echo "SELECTED_EDITOR=vim" >~/.selected_editor
 {
     echo
     echo "# Nicer prompt with git branch"
+    echo "# These lines were automatically appended by the script"
     cat bash-prompt
 } >>~/.bashrc
 
