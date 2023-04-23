@@ -19,6 +19,7 @@ fi
 #                        Creating common dirs and files                        #
 ################################################################################
 mkdir -p ~/personal
+mkdir -p ~/programs
 mkdir -p ~/.local/bin
 cp min-tmux-conf ~/.tmux.conf
 
@@ -60,9 +61,6 @@ progs="\
 # AND I SPENT A LOT OF TIME SEARCHING FOR A WORKAROUND - NOTHING WORKED
 dev_progs="\
     build-essential \
-    clangd \
-    clang-tidy \
-    clang-format \
     bear \
     shellcheck \
     flake8 \
@@ -88,16 +86,30 @@ read -p "Install neovim? (y/n) " choice
 
 case "$choice" in
     y|Y )  {
-        mkdir -p ~/programs
         wget \
-            https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.tar.gz \
+            https://github.com/neovim/neovim/releases/download/stable/nvim.appimage \
             -P ~/programs
-        tar xzvf ~/programs/nvim-linux64.tar.gz --directory ~/programs
-        ln -s ~/programs/nvim-linux64/bin/nvim ~/.local/bin/nvim
+        ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
         mkdir -p ~/.config && cp -r ./nvim ~/.config
         echo "SELECTED_EDITOR=nvim" >~/.selected_editor
     };;
 esac
+
+# clang: https://releases.llvm.org/download.html
+read -p "Custom clang installation? (y/n) " choice
+
+case "$choice" in
+    y|Y )  {
+	dest="llvm-clang-15"
+	wget \
+		https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
+		-P ~/programs/"$dest"
+	for i in ~/programs/"$dest"/clang*; do
+		ln -s "$i" ~/.local/bin/"$(basename $i)"
+	done
+    };;
+esac
+
 ################################################################################
 #                                   The end.                                   #
 ################################################################################
