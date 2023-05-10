@@ -100,11 +100,15 @@ read -p "Custom clang installation? (y/n) " choice
 
 case "$choice" in
     y|Y )  {
-	dest="llvm-clang-15"
+    dest="llvm-clang-15"
+    arch_name="clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz"
+    arch_basename="clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04"
 	wget \
-		https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
-		-P ~/programs/"$dest"
-	for i in ~/programs/"$dest"/clang*; do
+		https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/$arch_name \
+		-P ~/programs
+    mkdir -p ~/programs/"$dest"
+    tar -xf ~/programs/"$arch_name" -C ~/programs/"$dest"
+	for i in ~/programs/"$dest"/"$arch_basename"/bin/clang*; do
 		ln -s "$i" ~/.local/bin/"$(basename $i)"
 	done
     };;
