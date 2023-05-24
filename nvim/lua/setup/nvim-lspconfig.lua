@@ -45,3 +45,34 @@ require('lspconfig')['clangd'].setup{
     flags = lsp_flags
 }
 
+-- do `pip install 'python-lsp-server[all]'`
+require('lspconfig')['pylsp'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    -- capabilities = capabilities,
+    settings = {
+        -- formatCommand = {'black'},
+        pylsp = {
+            -- configurationSources = {'flake8'},
+            plugins = {
+                -- pylint = { enabled = true, },
+                -- flake8 = { enabled = true, },
+                -- maccabe = { enabled = false, },
+                -- pyflakes = { enabled = false, },
+                -- autopep8 = { enabled = false, },
+                -- yapf = { enabled = false, },
+                jedi = {
+                    extra_paths = {
+                        -- paths for python to look for modules
+                    },
+                },
+                -- flake8 = {
+                --     enabled = true,
+                --     config = '/home/ahmad1337/.config/flake8',
+                -- },
+        --         black = { enabled = true, },
+            }
+        }
+    }
+}
+

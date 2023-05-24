@@ -68,10 +68,10 @@ return require('packer').startup(function(use)
         'https://github.com/neovim/nvim-lspconfig',
         config = function() require('setup/nvim-lspconfig') end
     }
-    use {
-        'mfussenegger/nvim-lint',
-        config = function () require('setup/nvim-lint') end
-    }
+    -- use {
+    --     'mfussenegger/nvim-lint',
+    --     config = function () require('setup/nvim-lint') end
+    -- }
     use 'justinmk/vim-sneak'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
