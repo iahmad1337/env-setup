@@ -26,6 +26,10 @@ cp min-tmux-conf ~/.tmux.conf
 ################################################################################
 #                                   .bashrc                                    #
 ################################################################################
+sed -i 's/HISTSIZE=[0-9]*/HISTSIZE=/' ~/.bashrc
+sed -i 's/HISTFILESIZE=[0-9]*/HISTFILESIZE=/' ~/.bashrc
+cat eternal-history.sh >>~/.bashrc
+
 {
     echo
     echo "# Nicer prompt with git branch"
