@@ -133,6 +133,22 @@ echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
 # ctrl+t for fuzzy substitution
 
 ################################################################################
+#                                    Vcpkg                                     #
+################################################################################
+
+read -p "Install vcpkg? (y/n) " choice
+
+case "$choice" in
+    y|Y )  {
+    cd "$HOME"
+    git clone https://github.com/Microsoft/vcpkg.git
+    cd vcpkg
+    ./bootstrap-vcpkg.sh -disableMetrics
+    ./vcpkg install abseil fmt gtest benchmark range-v3 re2 nlohmann-json spdlog argparse
+    cd
+    };;
+esac
+################################################################################
 #                                   The end.                                   #
 ################################################################################
 
