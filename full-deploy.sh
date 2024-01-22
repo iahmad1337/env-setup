@@ -75,7 +75,12 @@ utility_progs="\
     tmux \
     htop \
     ncdu \
+    fzf \
+    bat \
+    fd-find \
 "
+
+# bat is invoked via `batcat`
 
 # Install programs essential for development
 sudo apt install -q -y $progs
@@ -117,6 +122,15 @@ case "$choice" in
 	done
     };;
 esac
+
+################################################################################
+#                                     fzf                                      #
+################################################################################
+
+# How to find this path: https://github.com/junegunn/fzf/issues/1866#issuecomment-585176100
+echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
+# ctrl+r for fuzzy history
+# ctrl+t for fuzzy substitution
 
 ################################################################################
 #                                   The end.                                   #
