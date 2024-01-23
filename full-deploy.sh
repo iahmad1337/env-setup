@@ -46,7 +46,7 @@ install_progs() {
     case "$choice" in
         y|Y )  {
             echo "Installing $1..."
-            sudo apt install $2
+            sudo apt install -y $2
             echo "Done installing $1"
         };;
         * ) {
@@ -78,6 +78,10 @@ utility_progs="\
     fzf \
     bat \
     fd-find \
+    duf \
+    hyperfine \
+    zoxide \
+    entr \
 "
 
 # bat is invoked via `batcat`
@@ -124,15 +128,6 @@ case "$choice" in
 esac
 
 ################################################################################
-#                                     fzf                                      #
-################################################################################
-
-# How to find this path: https://github.com/junegunn/fzf/issues/1866#issuecomment-585176100
-echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
-# ctrl+r for fuzzy history
-# ctrl+t for fuzzy substitution
-
-################################################################################
 #                                    Vcpkg                                     #
 ################################################################################
 
@@ -148,6 +143,22 @@ case "$choice" in
     cd
     };;
 esac
+
+################################################################################
+#                                     fzf                                      #
+################################################################################
+
+# How to find this path: https://github.com/junegunn/fzf/issues/1866#issuecomment-585176100
+echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
+# ctrl+r for fuzzy history
+# ctrl+t for fuzzy substitution
+
+################################################################################
+#                                    zoxide                                    #
+################################################################################
+
+eval "$(zoxide init bash)"
+
 ################################################################################
 #                                   The end.                                   #
 ################################################################################
