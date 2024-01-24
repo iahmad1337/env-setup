@@ -105,6 +105,10 @@ case "$choice" in
         ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
         mkdir -p ~/.config && cp -r ./nvim ~/.config
         echo "SELECTED_EDITOR=nvim" >~/.selected_editor
+
+        pip3 install pynvim
+        sudo apt install libfuse2  # to launch appimage
+        chmod u+x "~/.local/bin/nvim"
     };;
 esac
 
