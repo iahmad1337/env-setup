@@ -16,26 +16,10 @@ if [ ! -e "ROOT_MARKER" ]; then
 fi
 
 ################################################################################
-#                        Creating common dirs and files                        #
+#                         Perform basic setup actions                          #
 ################################################################################
-mkdir -p ~/personal
-mkdir -p ~/programs
-mkdir -p ~/.local/bin
-cp min-tmux-conf ~/.tmux.conf
 
-################################################################################
-#                                   .bashrc                                    #
-################################################################################
-sed -i 's/HISTSIZE=[0-9]*/HISTSIZE=/' ~/.bashrc
-sed -i 's/HISTFILESIZE=[0-9]*/HISTFILESIZE=/' ~/.bashrc
-cat eternal-history.sh >>~/.bashrc
-
-{
-    echo
-    echo "# Nicer prompt with git branch"
-    echo "# These lines were automatically appended by the script"
-    cat bash-prompt
-} >>~/.bashrc
+./deploy.sh
 
 ################################################################################
 #                       Download the necessary software                        #
@@ -161,7 +145,7 @@ echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
 #                                    zoxide                                    #
 ################################################################################
 
-eval "$(zoxide init bash)"
+echo 'eval "$(zoxide init bash)"' >>~/.bashrc
 
 ################################################################################
 #                                   The end.                                   #

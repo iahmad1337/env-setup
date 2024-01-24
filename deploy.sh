@@ -29,6 +29,11 @@ echo "SELECTED_EDITOR=vim" >~/.selected_editor
 ################################################################################
 #                                   .bashrc                                    #
 ################################################################################
+
+sed -i 's/HISTSIZE=[0-9]*/HISTSIZE=/' ~/.bashrc
+sed -i 's/HISTFILESIZE=[0-9]*/HISTFILESIZE=/' ~/.bashrc
+cat eternal-history.sh >>~/.bashrc
+
 {
     echo
     echo "# Nicer prompt with git branch"
@@ -46,6 +51,6 @@ for prog in $progs; do
     sudo apt install -q -y "$prog"
 done
 
-echo "Deployment finished."
+echo "Minimal deployment finished."
 echo "Current state of the filesystem:"
 df -h
