@@ -126,6 +126,7 @@ case "$choice" in
     cd "$HOME"
     git clone https://github.com/Microsoft/vcpkg.git
     cd vcpkg
+    sudo apt install zip pkg-config
     ./bootstrap-vcpkg.sh -disableMetrics
     ./vcpkg install abseil fmt gtest benchmark range-v3 re2 nlohmann-json spdlog argparse
     cd
