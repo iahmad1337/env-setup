@@ -6,6 +6,13 @@ vim.cmd([[
     nnoremap <space>l <C-w>l
 ]])
 
+-- tmux and gui clipboard
+vim.cmd([[
+    inoremap <C-v> <ESC>"+pa
+    vnoremap <C-c> "+y
+    vnoremap <C-d> "+d
+]])
+
 -- Better escape-sequence
 vim.cmd([[
     inoremap jk <ESC>
