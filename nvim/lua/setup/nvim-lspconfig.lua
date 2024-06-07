@@ -45,6 +45,7 @@ require('lspconfig')['clangd'].setup{
     flags = lsp_flags
 }
 
+
 -- do `pip install 'python-lsp-server[all]'`
 require('lspconfig')['pylsp'].setup{
     on_attach = on_attach,
@@ -63,7 +64,8 @@ require('lspconfig')['pylsp'].setup{
                 -- yapf = { enabled = false, },
                 jedi = {
                     extra_paths = {
-                        -- paths for python to look for modules
+                        -- List all of the paths that have python modules
+                        -- defined in them
                     },
                 },
                 -- flake8 = {
@@ -75,4 +77,3 @@ require('lspconfig')['pylsp'].setup{
         }
     }
 }
-

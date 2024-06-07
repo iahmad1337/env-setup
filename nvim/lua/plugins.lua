@@ -5,6 +5,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Custom plugins
+require('setup/codesearch')
+
 -- `use` is a dummy parameter that prevents some spurious errors
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim" -- without this some strange things will happen on PackerUpdate

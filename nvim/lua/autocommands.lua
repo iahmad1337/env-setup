@@ -3,12 +3,43 @@ vim.cmd([[
 augroup ftype_group
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType python,py setlocal textwidth=80 ts=4 sts=4 sw=4 foldmethod=indent
+    autocmd FileType python,py setlocal textwidth=120 ts=4 sts=4 sw=4 foldmethod=indent
     autocmd FileType cpp,c,h,hpp setlocal ts=4 sts=4 sw=4 foldenable foldmethod=syntax
     autocmd FileType java,hs,js,tex,latex setlocal foldenable foldmethod=syntax
     autocmd FileType txt,text,tex,latex setlocal spell spelllang=ru,en
 augroup END
 ]])
+
+vim.api.nvim_create_autocmd(
+    {"BufRead", "BufNewFile"},
+    {
+        pattern = {
+            'ya.make',
+            'ya.make.inc',
+            'ya.inc'
+            -- 'include.inc',
+            -- 'recipe.inc'
+            -- ...
+            -- other commonly used patterns
+        },
+        callback = function()
+            vim.o.filetype = 'yamake'
+        end
+    }
+)
+
+vim.api.nvim_create_autocmd(
+    {"BufRead", "BufNewFile"},
+    {
+        pattern = {
+            '*.j2',
+            '*.jinja',
+        },
+        callback = function()
+            vim.o.filetype = 'jinja'
+        end
+    }
+)
 
 -- On save
 vim.cmd([[

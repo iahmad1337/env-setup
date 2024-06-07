@@ -1,7 +1,7 @@
 -- TODO: copypaste can be reduced
 vim.cmd("let g:startify_bookmarks = [ " ..
     "'~/.config/nvim', " ..
-    "'~/.vim', " ..
+    "'~/term-8', " ..
     "'~/term-7', " ..
     "'~/term-6', " ..
     "'~/term-5', " ..
