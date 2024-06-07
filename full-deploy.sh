@@ -84,7 +84,7 @@ read -p "Install neovim? (y/n) " choice
 case "$choice" in
     y|Y )  {
         wget \
-            https://github.com/neovim/neovim/releases/download/stable/nvim.appimage \
+            https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage \
             -P ~/programs
         ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
         mkdir -p ~/.config && cp -r ./nvim ~/.config
