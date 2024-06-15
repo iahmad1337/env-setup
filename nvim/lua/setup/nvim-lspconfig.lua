@@ -45,6 +45,12 @@ require('lspconfig')['clangd'].setup{
     flags = lsp_flags
 }
 
+require('lspconfig')['cmake'].setup{
+    cmd = {'cmake-language-server'},
+    filetypes = { 'cmake', 'CMakeLists.txt'},
+    on_attach = on_attach,
+    flags = lsp_flags
+}
 
 -- do `pip install 'python-lsp-server[all]'`
 require('lspconfig')['pylsp'].setup{
