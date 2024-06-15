@@ -90,7 +90,7 @@ case "$choice" in
         mkdir -p ~/.config && cp -r ./nvim ~/.config
         echo "SELECTED_EDITOR=nvim" >~/.selected_editor
 
-        pip3 install pynvim
+        pip3 install --break-system-package pynvim
         sudo apt install libfuse2  # to launch appimage
         chmod u+x "~/.local/bin/nvim"
     };;
