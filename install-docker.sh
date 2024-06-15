@@ -7,6 +7,10 @@ if docker ps; then
     return 0
 fi
 
+# The steps are based on:
+# - https://docs.docker.com/engine/install/ubuntu/
+# - https://docs.docker.com/engine/install/linux-postinstall/
+
 ############
 #  step 1  #
 ############
@@ -35,3 +39,11 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ############
 
 sudo docker run hello-world
+
+
+################################################################################
+#                              Post-installation                               #
+################################################################################
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker  # it may be necessary to restart the machine
