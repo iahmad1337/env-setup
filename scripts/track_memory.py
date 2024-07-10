@@ -37,6 +37,7 @@ def main():
             ./track_memory.py --pid 42 >process_log.json
             ./track_memory.py --name nvim >process_log.json
             ./track_memory.py --name tmux --interval 0.5 >process_log.json
+            ./track_memory.py --pid 228 --human >human_readable_log.json
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -48,6 +49,13 @@ def main():
         dest="interval",
         default=1.0,
         help="time interval for probing the memory",
+    )
+
+    parser.add_argument(
+        "--human",
+        action="store_true",
+        dest="human",
+        help="Convert units to human-readable form",
     )
     parser.add_argument("pid_or_name", type=str)
 
@@ -75,6 +83,8 @@ def main():
     else:
         raise Exception("You should specify either --pid or --name option")
 
+    format_size = to_human if args.human else lambda x: x
+
     match matching_procs:
         case [proc]:
             result = {}
@@ -87,8 +97,8 @@ def main():
                         time_diff = datetime.datetime.now() - start
                         result[f"{time_diff.seconds}.{time_diff.microseconds // 1000:03d}"] = {
                             "memory_info": {
-                                "rss": to_human(proc.memory_info()[0]),
-                                "vms": to_human(proc.memory_info()[1]),
+                                "rss": format_size(proc.memory_info()[0]),
+                                "vms": format_size(proc.memory_info()[1]),
                             },
                             "cpu_usage_user_seconds": proc.cpu_times()[0],
                         }
