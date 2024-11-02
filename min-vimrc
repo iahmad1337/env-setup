@@ -41,7 +41,7 @@ Plug 'kana/vim-textobj-user' " necessary for the following plugin
 Plug 'kana/vim-textobj-entire' " ae ie
 Plug 'tommcdo/vim-exchange'  " cx<motion> cxx X(visual) cxc(cancel)
 Plug 'machakann/vim-highlightedyank'
-Plug 'A-Ih/argtextobj.vim' " aa ia (original plugin conflicts with my mappings)
+Plug 'iahmad1337/argtextobj.vim' " aa ia (original plugin conflicts with my mappings)
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'haya14busa/incsearch.vim'

@@ -18,13 +18,6 @@ require('nvim-tree').setup({
       respect_buf_cwd = true,
       on_attach = "disable",
       select_prompts = false,
-      view = {
-        adaptive_size = true,
-        width = {
-            min = 30,
-            max = 50,
-        },
-      },
       renderer = {
         add_trailing = false,
         group_empty = false,

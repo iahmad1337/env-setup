@@ -16,9 +16,14 @@ return require('packer').startup(function(use)
     use 'kana/vim-textobj-entire' -- ae ie
     use 'tommcdo/vim-exchange'  -- cx<motion> cxx X(visual) cxc(cancel)
     use {
-        'A-Ih/argtextobj.vim',
+        'iahmad1337/argtextobj.vim',
         config = function() require('setup/argtextobj') end
     } -- aa ia
+    use 'iahmad1337/sql-format.nvim'
+    use {
+        'cdelledonne/vim-cmake',
+        config = function() require('setup/vim-cmake') end
+    }
     use 'tpope/vim-surround'
     use {
         'numToStr/Comment.nvim',

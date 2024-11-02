@@ -48,6 +48,11 @@ vim.cmd([[
     2match Underlined /\vTODO[^.]*/
 ]])
 
+-------------------
+--  Apppearance  --
+-------------------
+vim.o.termguicolors = true
+
 -----------------------------------
 --  Risky non-portable commands  --
 -----------------------------------

@@ -52,5 +52,6 @@ endfun
 augroup my_autocmd_group
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
+    autocmd BufWritePre *.sql FormatSql
 augroup END
 ]])
