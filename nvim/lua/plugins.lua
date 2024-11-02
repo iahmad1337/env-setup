@@ -20,10 +20,6 @@ return require('packer').startup(function(use)
         config = function() require('setup/argtextobj') end
     } -- aa ia
     use 'iahmad1337/sql-format.nvim'
-    use {
-        'cdelledonne/vim-cmake',
-        config = function() require('setup/vim-cmake') end
-    }
     use 'tpope/vim-surround'
     use {
         'numToStr/Comment.nvim',
@@ -76,10 +72,6 @@ return require('packer').startup(function(use)
         'https://github.com/neovim/nvim-lspconfig',
         config = function() require('setup/nvim-lspconfig') end
     }
-    -- use {
-    --     'mfussenegger/nvim-lint',
-    --     config = function () require('setup/nvim-lint') end
-    -- }
     use 'justinmk/vim-sneak'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
