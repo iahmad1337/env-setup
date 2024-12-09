@@ -72,41 +72,21 @@ utility_progs="\
 # bat is invoked via `batcat`
 
 # Install programs essential for development
-sudo apt install -q -y $progs
-
-install_progs "development programs" "$dev_progs"
-install_progs "utility programs" "$utility_progs"
 
 ################################################################################
 #                                    Neovim                                    #
 ################################################################################
-read -p "Install neovim? (y/n) " choice
-
-case "$choice" in
-    y|Y )  {
-        wget \
-            https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage \
-            -P ~/programs
-        ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
-        mkdir -p ~/.config && cp -r ./nvim ~/.config
-        echo "SELECTED_EDITOR=nvim" >~/.selected_editor
-
-        pip3 install --break-system-package pynvim
-        sudo apt install libfuse2  # to launch appimage
-        chmod u+x "~/.local/bin/nvim"
-    };;
-esac
 
 # clang: https://releases.llvm.org/download.html
 read -p "Custom clang installation? (y/n) " choice
 
 case "$choice" in
     y|Y )  {
-    dest="llvm-clang-15"
-    arch_name="clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz"
-    arch_basename="clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04"
+    dest="llvm-clang-17"
+    arch_name="clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04.tar.xz"
+    arch_basename="clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04"
 	wget \
-		https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/$arch_name \
+		https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.6/$arch_name \
 		-P ~/programs
     mkdir -p ~/programs/"$dest"
     tar -xf ~/programs/"$arch_name" -C ~/programs/"$dest"

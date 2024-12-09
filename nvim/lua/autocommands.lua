@@ -55,3 +55,17 @@ augroup my_autocmd_group
     autocmd BufWritePre *.sql FormatSql
 augroup END
 ]])
+
+-- For already touched files - open them in readonly
+vim.cmd([[
+autocmd SwapExists * let v:swapchoice = "o"
+]])
+
+-- For some reason, automatic line numbers don't work, so we do this
+-- The only filetype that we want to avoid is `NvimTree`
+vim.cmd([[
+augroup ShowLineNumberForShortFiles
+  autocmd!
+  autocmd BufEnter * if &ft != 'NvimTree' | setlocal number | endif
+augroup END
+]])

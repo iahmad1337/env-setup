@@ -39,7 +39,7 @@ local lsp_flags = {
 -- WHy the fuck are there two places that setup lsp??? (the second one is in
 -- setup/nvim-cmp.lua)
 require('lspconfig')['clangd'].setup{
-    cmd = {'clangd', '--clang-tidy'},
+    cmd = {'clangd', '-j=2', '--background-index=true', '--background-index-priority=low'},
     filetypes = { 'c', 'cpp', 'cc', 'objc', 'objcpp', 'cuda' },
     on_attach = on_attach,
     flags = lsp_flags
