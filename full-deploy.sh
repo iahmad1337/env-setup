@@ -72,10 +72,31 @@ utility_progs="\
 # bat is invoked via `batcat`
 
 # Install programs essential for development
+sudo apt install -q -y $progs
+
+install_progs "development programs" "$dev_progs"
+install_progs "utility programs" "$utility_progs"
 
 ################################################################################
 #                                    Neovim                                    #
 ################################################################################
+
+read -p "Install neovim? (y/n) " choice
+
+case "$choice" in
+    y|Y )  {
+        wget \
+            https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage \
+            -P ~/programs
+        ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
+        mkdir -p ~/.config && cp -r ./nvim ~/.config
+        echo "SELECTED_EDITOR=nvim" >~/.selected_editor
+
+        pip3 install pynvim 'python-lsp-server[all]'
+        sudo apt install libfuse2  # to launch appimage
+        chmod u+x "~/.local/bin/nvim"
+    };;
+esac
 
 # clang: https://releases.llvm.org/download.html
 read -p "Custom clang installation? (y/n) " choice
