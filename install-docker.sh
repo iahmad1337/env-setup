@@ -37,13 +37,17 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ############
 #  step 3  #
 ############
-
-sudo docker run hello-world
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 
 ################################################################################
 #                              Post-installation                               #
 ################################################################################
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker  # it may be necessary to restart the machine
+
+# Launch this command right after running this script; otherwise docker won't
+# work. Or just restart your machine and changes from step 3 will apply
+# automatically
+newgrp docker
+
+sudo docker run hello-world

@@ -52,11 +52,12 @@ require('lspconfig')['cmake'].setup{
     flags = lsp_flags
 }
 
+-- NOTE: commented due to deprecation warning bug in tsserver
 -- prior to this, do `npm install -g typescript typescript-language-server`
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags
-}
+-- require('lspconfig')['tsserver'].setup{
+--     on_attach = on_attach,
+--     flags = lsp_flags
+-- }
 
 -- do `pip install 'python-lsp-server[all]'`
 require('lspconfig')['pylsp'].setup{
