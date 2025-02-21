@@ -15,6 +15,12 @@ if [ ! -e "ROOT_MARKER" ]; then
 fi
 
 ################################################################################
+#                             Other setup scripts                              #
+################################################################################
+
+./configure-git.sh
+
+################################################################################
 #                        Creating common dirs and files                        #
 ################################################################################
 mkdir -p ~/personal
@@ -39,15 +45,6 @@ cat eternal-history.sh >>~/.bashrc
     echo "# Nicer prompt with git branch"
     echo "# These lines were automatically appended by the script"
     cat bash-prompt
-} >>~/.bashrc
-
-################################################################################
-#                                git completion                                #
-################################################################################
-cp git-completion.bash ~/.local/git-completion.bash
-{
-    echo
-    echo "source ${HOME}/.local/git-completion.bash"
 } >>~/.bashrc
 
 ################################################################################

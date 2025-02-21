@@ -10,10 +10,10 @@ import psutil
 
 def to_human(byte_size: int) -> str:
     suffix_to_divisor = {
-        "KiB" : 1024,
-        "MiB" : 1024 ** 2,
-        "GiB" : 1024 ** 3,
-        "TiB" : 1024 ** 4,
+        "KiB": 1024,
+        "MiB": 1024 ** 2,
+        "GiB": 1024 ** 3,
+        "TiB": 1024 ** 4,
     }
     for suffix, divisor in sorted(suffix_to_divisor.items(), key=lambda kv: kv[1], reverse=True):
         if byte_size // divisor >= 1:
