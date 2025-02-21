@@ -55,8 +55,4 @@ vim.cmd([[
 -------------------
 vim.o.termguicolors = true
 
------------------------------------
---  Risky non-portable commands  --
------------------------------------
-
 vim.o.mouse = 'a'
