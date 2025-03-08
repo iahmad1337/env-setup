@@ -1,0 +1,5 @@
+- Under linux, put the `Shortcuts` folder to
+  `$HOME/.local/share/xournalpp/plugins`, so that the result will look like
+  `$HOME/.local/share/xournalpp/plugins/Shortcuts`
+- Under Windows, put this folder to
+  `C:\Program Files\Xournal++\share\xournalpp\plugins`
