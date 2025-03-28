@@ -151,6 +151,7 @@ esac
 ################################################################################
 
 # How to find this path: https://github.com/junegunn/fzf/issues/1866#issuecomment-585176100
+# Or just save the output of `fzf --bash`
 echo '. "/usr/share/doc/fzf/examples/key-bindings.bash"'>>~/.bashrc
 # ctrl+r for fuzzy history
 # ctrl+t for fuzzy substitution
