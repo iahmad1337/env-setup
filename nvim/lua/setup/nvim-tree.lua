@@ -15,7 +15,7 @@ require('nvim-tree').setup({
       prefer_startup_root = false,
       sync_root_with_cwd = false,
       reload_on_bufenter = false,
-      respect_buf_cwd = true,
+      respect_buf_cwd = false,
       on_attach = "disable",
       select_prompts = false,
       renderer = {

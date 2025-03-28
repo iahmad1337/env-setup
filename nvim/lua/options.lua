@@ -1,6 +1,6 @@
 vim.o.shada = "!,'1337,<50,s10,h"
 
-vim.o.autochdir = true
+vim.o.autochdir = false
 
 vim.o.scrolloff = 5
 vim.o.foldenable = true
