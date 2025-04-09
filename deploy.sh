@@ -20,7 +20,7 @@ fi
 # The most important part!!!!
 mkdir -p $HOME/.local
 for dir in $(ls -A home-root); do
-    cp -r "home-root/$dir" $HOME/.local/
+    (cd home-root && cp -r "$dir" $HOME/.local/)
 done
 
 ################################################################################
