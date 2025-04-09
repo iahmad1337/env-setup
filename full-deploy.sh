@@ -84,15 +84,19 @@ read -p "Install neovim? (y/n) " choice
 
 case "$choice" in
     y|Y )  {
+        case $(uname -m) in
+            x86_64*)  wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage -P ~/programs;;
+            aarch64*) echo "You have to install nvim from source on this platform!";;
+        esac
         wget \
             https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage \
             -P ~/programs
-        ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
+        chmod u+x ~/programs/nvim.appimage
+        ln -sf ~/programs/nvim.appimage ~/.local/bin/nvim
         echo "SELECTED_EDITOR=nvim" >~/.selected_editor
 
         pip3 install pynvim 'python-lsp-server[all]'
-        sudo apt install libfuse2  # to launch appimage
-        chmod u+x "~/.local/bin/nvim"
+        sudo apt install -y libfuse2  # to launch appimage
     };;
 esac
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -eu
 
@@ -20,7 +20,9 @@ fi
 # The most important part!!!!
 mkdir -p $HOME/.local
 for dir in $(ls -A home-root); do
-    (cd home-root && cp -r "$dir" $HOME/.local/)
+    pushd home-root
+    cp -r "$dir" $HOME
+    popd
 done
 
 ################################################################################
