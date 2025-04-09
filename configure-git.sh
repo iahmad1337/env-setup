@@ -12,7 +12,6 @@ git config --global alias.fixup "commit -a --fixup=HEAD"
 ################################################################################
 #                                git completion                                #
 ################################################################################
-cp git-completion.bash ~/.local/git-completion.bash
 {
     echo
     echo "source ${HOME}/.local/git-completion.bash"

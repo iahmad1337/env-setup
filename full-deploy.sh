@@ -88,7 +88,6 @@ case "$choice" in
             https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage \
             -P ~/programs
         ln -s ~/programs/nvim.appimage ~/.local/bin/nvim
-        mkdir -p ~/.config && cp -r ./nvim ~/.config
         echo "SELECTED_EDITOR=nvim" >~/.selected_editor
 
         pip3 install pynvim 'python-lsp-server[all]'

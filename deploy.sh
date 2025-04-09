@@ -15,6 +15,15 @@ if [ ! -e "ROOT_MARKER" ]; then
 fi
 
 ################################################################################
+#                              Initialize homedir                              #
+################################################################################
+# The most important part!!!!
+mkdir -p $HOME/.local
+for dir in $(ls -A home-root); do
+    cp -r "$dir" $HOME/.local/
+done
+
+################################################################################
 #                             Other setup scripts                              #
 ################################################################################
 
@@ -23,13 +32,6 @@ fi
 ################################################################################
 #                        Creating common dirs and files                        #
 ################################################################################
-mkdir -p ~/personal
-mkdir -p ~/.local/bin
-mkdir -p ~/.vim
-mkdir -p ~/.config/mc
-cp min-vimrc ~/.vimrc
-cp min-tmux-conf ~/.tmux.conf
-cp mc_ini ~/.config/mc/ini
 echo "SELECTED_EDITOR=vim" >~/.selected_editor
 
 ################################################################################
