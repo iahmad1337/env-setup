@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+MAN_PAGES=$HOME/.local/share/man_pages.list
+
+if [ ! -e $MAN_PAGES ]; then
+    echo "baking man page cache..."
+    man -k . >$MAN_PAGES
+fi
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     cache_age_seconds=$(($(date +%s) - $(date -r $MAN_PAGES +%s)));;
+    Darwin*)    cache_age_seconds=$(($(date +%s) - $(stat -f%m -t%s $MAN_PAGES)));;
+    *)          echo "myman: unsupported platform"; exit 1;;
+esac
+
+# renew cache if older than 1 day
+if (( cache_age_seconds > 24 * 3600 )); then
+    man -k . >$MAN_PAGES
+fi
+
+cat $MAN_PAGES | fzf | cut -d '(' -f 1 | xargs man
+
+# vim: ts=4 sw=4 expandtab filetype=bash
