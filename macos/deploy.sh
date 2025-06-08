@@ -1,0 +1,2 @@
+- Iterm:
+    - option+command behaviour: https://stackoverflow.com/a/22312856/17549962
