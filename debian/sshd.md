@@ -94,6 +94,11 @@ port = <ssh port>
 ```
 Inspired by https://wiki.archlinux.org/title/Fail2ban#Custom_SSH_jail
 
+Status can be checked via `fail2ban-client status sshd`
+
+## Monitoring
+TODO
+
 ## Setting up static ip
 First, get a white IP from ISP.
 There's no single working tutorial, but a set of articles that I followed:
