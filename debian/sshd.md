@@ -33,7 +33,7 @@ ip a  # look for something like 192.168.* - this is the local address
 ssh -p<ssh port> <user>@<local ip>
 ```
 
-# Security
+## Security
 First, we install and configure ufw ([guide](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)):
 ```bash
 sudo su
@@ -62,16 +62,48 @@ To                         Action      From
 <ssh port>/tcp (v6)             ALLOW IN    Anywhere (v6)
 ```
 
-# Setting up static ip
+### sshd options
+- PermitRootLogin no
+- PasswordAuthentication no
+- X11Forwarding no
+- AllowUsers <UserName>
+
+### fail2ban
+- https://wiki.archlinux.org/title/Fail2ban
+```bash
+apt install fail2ban
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+```
+Write to /etc/fail2ban/jail.local:
+```
+[DEFAULT]
+bantime = 7d
+findtime = 1m
+maxretry = 2
+
+[sshd]
+enabled   = true
+filter    = sshd
+banaction = iptables
+backend   = systemd
+maxretry  = 3
+findtime  = 1m
+bantime   = 2w
+ignoreip  = 127.0.0.1/8
+port = <ssh port>
+```
+Inspired by https://wiki.archlinux.org/title/Fail2ban#Custom_SSH_jail
+
+## Setting up static ip
 First, get a white IP from ISP.
 There's no single working tutorial, but a set of articles that I followed:
 - https://www.cyberciti.biz/faq/add-configure-set-up-static-ip-address-on-debianlinux/
 - https://habr.com/ru/articles/579924/
 - https://wiki.debian.org/NetworkConfiguration
 
-## 1. Set up static ip for server in LAN
+### 1. Set up static ip for server in LAN
 
-### [FAIL] 1.a Set up on server
+#### [FAIL] 1.a Set up on server
 Link: https://www.cyberciti.biz/faq/add-configure-set-up-static-ip-address-on-debianlinux/
 ```bash
 # backup
@@ -89,19 +121,23 @@ iface wlp8s0 inet static
 Syntax:
 https://unix.stackexchange.com/questions/128439/good-detailed-explanation-of-etc-network-interfaces-syntax
 & `man 5 interfaces`.
-### [SUCCESS] 1.b Set up on router
+#### [SUCCESS] 1.b Set up on router
 for d-link, go to `Connections Setup -> Lan -> Static IP Addresses` and assign
 the server MAC address to a fixed IP
 
-## [TBD] 2. Forward router port to machine port
+### [SUCCESS] 2. Forward router port to machine port
 - Instructions for all models: https://portforward.com/router.htm
-In my case: Firewall -> Virtual Servers -> Add - there, do something like this https://mobileproxy.space/en/pages/how-to-configure-port-forwarding-in-d-link.html
+In my case: Firewall -> Virtual Servers -> Add - there, do something like this
+https://mobileproxy.space/en/pages/how-to-configure-port-forwarding-in-d-link.html
 
-Still didn't work :( ssh only works when all computers are on the same home
-network
+*Internal IP and port* - use static LAN IP of server assigned at step (1.b).
+*External IP and port* - leave the IP empty and use whatever port you want to
+expose to external web.
+
+This turned out to work as expected and the computer was visible from outside.
 
 
-# Links:
+## Links:
 - https://askubuntu.com/questions/430853/how-do-i-find-my-internal-ip-address
 - https://www.reddit.com/r/debian/comments/14kssxo/do_i_need_fail2ban/
 - https://wiki.archlinux.org/title/OpenSSH#Server_usage
