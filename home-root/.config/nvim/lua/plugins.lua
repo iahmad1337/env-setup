@@ -7,6 +7,7 @@ end
 
 -- Custom plugins
 require('setup/codesearch')
+require('setup/add-image')
 
 -- `use` is a dummy parameter that prevents some spurious errors
 return require('packer').startup(function(use)
